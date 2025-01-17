@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gene Predictor</title>
+        <style>
+            body{
+                background-color: rgb(227, 221, 219);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+                overflow-y: hidden;
+            }
+            header{
+                width:100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+            }
+            h1{
+                margin: 0;
+                font-size: 4em;
+                font-family: 'Book Antiqua', Palatino, serif;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 10px;
+            }
+            img{
+                width: 150px; 
+                height: auto;
+                top: 180px;
+            }
+            p{
+                font-family: 'Book Antiqua', Palatino, serif;
+                font-size: 1.3em;
+                max-width: 700px;
+                margin: 20px auto;
+            }
+            .description{
+                margin-top: 20px;
+            }
+            .explanation{
+                margin:5px auto;
+                max-width: 700px;
+            }
+            .custom-button{
+                background-color: #eeede9;
+                border: 1px solid #ccc;
+                border-radius: 12px;
+                padding: 10px 20px;
+                font-size: 1em;
+                cursor:pointer;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+                transition: background-color 0.3s ease;
+                margin-top: 10px;
+            }
+            .custom-button:hover{
+                background-color: #d6d5d2;
+            }
+            .file-input-label{
+                display:  inline-block;
+                width:100px;
+                text-align: center;
+                font-family: 'Book Antiqua', Palatino, serif;
+                font-size: 1em;
+            }
+            .file-name{
+                font-family: 'Book Antiqua', Palatino, serif;
+                font-size: 1em;
+                margin-top: 50px;
+                color: #333;
+            }
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 2.5em;
+                }
+                img {
+                    width: 200px;
+                }
+                p {
+                    font-size: 1em;
+                }
+                .custom-button {
+                    font-size: 0.9em;
+                    padding: 8px 16px;
+                }
+            }
+            @media (max-width: 480px) {
+                h1 {
+                    font-size: 2em;
+                }
+                img {
+                    width: 150px;
+                }
+                p {
+                    font-size: 0.9em;
+                }
+                .custom-button {
+                    font-size: 0.8em;
+                    padding: 6px 12px;
+                }
+            }
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: rgb(150, 131, 126);
+                border: 5px solid white;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                display: none;
+            }
+           
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Gene Predictor</h1>
+            <!--Image-->
+        <img src="{{ url_for('static', filename='icon.png')}}" alt="Medical Report Icon">
+        </header>
+        
+        <p class="description">
+            Gene Predictor is an innovative AI tool that assists doctors in making personalized, accurate diagnoses. 
+            By analyzing a patient’s unique DNA, it provides probability-based insights into the likelihood of developing specific diseases.
+            This allows healthcare professionals to design more targeted treatment plans, enhancing the precision and effectiveness of patient care.
+        </p>
+        <p class="explanation">
+            <strong>Upload:</strong> Upload the patient’s genetic data file (CSV).
+        </p>
+        <p class="explanation">
+            <strong>Predict:</strong> Gene Predictor analyzes genetic markers to assess disease risk.
+        </p>
+        <p class="explanation">
+            <strong>Insights:</strong> Get a personalized prediction to guide diagnosis & treatment.
+        </p>
+        <form action="/predict" method="post" enctype="multipart/form-data" >
+            <!--Input field for gene expression data-->
+            <label for="input_file" class="custom-button file-input-label">Upload file</label>
+            <input type="file" id="input_file" name="input_file" required style="display:none;" onchange="showNotification('File uploaded successfully')">
+            <!--Submit button to send the form data-->
+            <label for="predict" class="custom-button file-input-label" onclick="validateForm()">Get Diagnosis</label>
+            <input type="submit"  id="predict" class="custom-button" required style="display: none;">
+        </form>
+        <div class="notification" id="notification">File uploaded successfully</div>
+        <script>
+            function showNotification(message) {
+                let notification = document.getElementById('notification');
+                notification.innerText = message;
+                notification.style.display = 'block';
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 3000);
+            }
+
+            function validateForm() {
+                var fileInput = document.getElementById('input_file');
+                if (!fileInput.value) {
+                    showNotification('You need to upload file first!');
+                    return false;
+                }
+                document.getElementById('uploadForm').submit();
+                return true;
+            }
+        </script>
+    </body>
+</html>

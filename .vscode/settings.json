@@ -1,0 +1,17 @@
+{
+    "cSpell.words": [
+        "dataframes",
+        "destdir",
+        "dtypes",
+        "fillna",
+        "gsms",
+        "hstack",
+        "joblib",
+        "proba"
+    ],
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
