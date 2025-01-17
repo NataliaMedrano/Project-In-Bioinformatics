@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Schizophrenia Result</title>
+        <style>
+            body{
+                background-color: rgb(227, 221, 219);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                flex-direction: column;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Prediction Result</h1>
+        <!--Display the prediction result-->
+        <p> This patient has a {{ prediction | safe }}% chance of developing Schizophrenia</p>
+        <!--Link to go back to the home page-->
+        <a href="/">Go back</a>
+    </body>
+</html>
